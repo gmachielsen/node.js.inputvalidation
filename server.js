@@ -22,10 +22,18 @@ app.post('/api/user', [
     // password must be at least 5 chars long
     // 2) idem (password length > 4)
     check('password').isLength({ min: 5 })
-  ], (request, response) => {
-        console.log("Welcome!");
-        const errors = validationResult(request);
-        console.log(errors);
+  ], (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors)
+    console.log(errors.username)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    User.create({
+        username: req.body.username,
+        password: req.body.password
+      }).then(user => res.json(user));
 });
 
 
