@@ -29,16 +29,10 @@ app.post('/api/user', [
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
-    User.create({
-        username: req.body.username,
-        password: req.body.password
-      }).then(user => res.json(user));
+    else {
+      return res.status(200).send({ok: 'No problems found'});
+    }
 });
-
-
-
-
 
 app.listen(port, () => {
     console.log('Server running on port: ', port);
