@@ -28,7 +28,11 @@ app.post('/api/user', [
       return res.status(422).json({ errors: errors.array() });
     }
     else {
-      return res.status(200).send({ok: 'No problems found'});
+      // do the work
+      let user = req.body;
+      console.log(user);
+      return res.status(200).send({ok: 'No problems found',
+    user: user});
     }
 });
 
