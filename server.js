@@ -24,21 +24,17 @@ app.post('/api/user', [
     check('password').isLength({ min: 5 })
   ], (req, res) => {
     const errors = validationResult(req);
-    console.log(errors)
-    console.log(errors.username)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
-    User.create({
-        username: req.body.username,
-        password: req.body.password
-      }).then(user => res.json(user));
+    else {
+      // do the work
+      let user = req.body;
+      console.log(user);
+      return res.status(200).send({ok: 'No problems found',
+    user: user});
+    }
 });
-
-
-
-
 
 app.listen(port, () => {
     console.log('Server running on port: ', port);
